@@ -39,24 +39,24 @@ This method adds a new item to the queue.
 * ************************************************* */
     bool added = false;
 
-    if (information != nullptr && !information->empty() && id > 0) {
-        Node* newNode = new Node;
-        newNode->data.id = id;
-        newNode->data.information = *information;
-        newNode->prev = nullptr;
-        newNode->next = head;
+    if (id > 0 && information != nullptr && !information->empty()) {
+        Node* n = new Node;
+        n->data.id = id;
+        n->data.information = *information;
+        n->prev = nullptr;
+        n->next = head;
 
         if (head != nullptr) {
-            head->prev = newNode;
+            head->prev = n;
         }
 
-        head = newNode;
+        head = n;
 
         if (tail == nullptr) {
-            tail = newNode;
+            tail = n;
         }
 
-        itemCount++;
+        itemCount = itemCount + 1;
         added = true;
     }
 
@@ -70,44 +70,33 @@ This method removes an item from the queue based on the queue type (FIFO or LIFO
 @return : bool pulled (true / false)
 * ************************************************* */
     bool pulled = false;
-    Node* removeNode = nullptr;
 
-    if (outData != nullptr) {
-        if (itemCount > 0) {
-            if (mode == LIFO) {
-                removeNode = head;
-            } else {
-                removeNode = tail;
-            }
+    if (outData != nullptr && itemCount > 0) {
+        Node* n = (mode == LIFO ? head : tail);
 
-            if (removeNode != nullptr) {
-                outData->id = removeNode->data.id;
-                outData->information = removeNode->data.information;
+        outData->id = n->data.id;
+        outData->information = n->data.information;
 
-                if (removeNode->prev != nullptr) {
-                    removeNode->prev->next = removeNode->next;
-                } else {
-                    head = removeNode->next;
-                }
-
-                if (removeNode->next != nullptr) {
-                    removeNode->next->prev = removeNode->prev;
-                } else {
-                    tail = removeNode->prev;
-                }
-
-                delete removeNode;
-                itemCount = itemCount - 1;
-                pulled = true;
-            }
+        if (n->prev != nullptr) {
+            n->prev->next = n->next;
+        } else {
+            head = n->next;
         }
+
+        if (n->next != nullptr) {
+            n->next->prev = n->prev;
+        } else {
+            tail = n->prev;
+        }
+
+        delete n;
+        itemCount = itemCount - 1;
+        pulled = true;
     }
 
-    if (!pulled) {
-        if (outData != nullptr) {
-            outData->id = -1;
-            outData->information.clear();
-        }
+    if (!pulled && outData != nullptr) {
+        outData->id = -1;
+        outData->information.clear();
     }
 
     return pulled;
@@ -119,18 +108,33 @@ This method clears all items from the queue.
 @param : none
 @return : bool cleared (true / false)
 * ************************************************* */
-    Node* current = head;
+    Node* n = head;
+    Node* next = nullptr;
 
-    while (current != nullptr) {
-        Node* nextNode = current->next;
-        delete current;
-        current = nextNode;
+    while (n != nullptr) {
+        next = n->next;
+        delete n;
+        n = next;
     }
 
     head = nullptr;
     tail = nullptr;
     itemCount = 0;
-
     return true;
+}
+
+bool Queue::peek(int& id) const {
+    bool found = false;
+    id = -1;
+
+    if (itemCount > 0) {
+        Node* n = (mode == LIFO ? head : tail);
+        if (n != nullptr) {
+            id = n->data.id;
+            found = true;
+        }
+    }
+
+    return found;
 }
 
