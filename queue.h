@@ -34,27 +34,27 @@ enum QueueType {
 
 class Queue {
 
-public:
-    /**********************
+    public:
+     /**********************
     *  Constructors / Destructor
     ***********************/
-    Queue(QueueType type = FIFO);
-    ~Queue();
+        Queue(QueueType type = FIFO);
+        ~Queue();
 
     /**********************
     *  Mutators
     ***********************/
-    bool clear();
-    bool push(int id, string* information);
-    bool pull(Data* outData);
+        bool clear();
+        bool push(int id, string* information);
+        bool pull(Data* outData);
     
     /**********************
     *  Accessors
     ***********************/
-   bool peek(int& id) const;
-   int count() const;
-   bool exists(int id) const;
-   int find(int id) const;
+        bool peek(int& id) const;
+        int count() const;
+        bool exists(int id) const;
+        int find(int id) const;
 
 private:
     /**************************************************
@@ -62,20 +62,19 @@ private:
     *  Purpose: Internal linked list node that stores
     *           Data and pointers to neighboring nodes.
     ************************************************* */
-    struct Node {
-    Data data;
-    Node *next;
-    Node *prev;
-    };
-
+        struct Node {
+        Data data;
+        Node *next;
+        Node *prev;
+        };
 
     /**********************
     *  Attributes
     ***********************/
-    Node* head;
-    Node* tail;
-    int   itemCount;
-    QueueType mode;
+        Node* head;
+        Node* tail;
+        int   itemCount;
+        QueueType mode;
 
 };
 

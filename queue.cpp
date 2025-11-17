@@ -10,10 +10,10 @@
 
 Queue::Queue(QueueType type) {
 /* **************************************************
-Constructor for Queue class.
-Initializes the queue type and sets up the linked list.
-@param : QueueType type
-@return : void
+*   Constructor for Queue class.
+*   Initializes the queue type and sets up the linked list.
+*   @param : QueueType type
+*   @return : void
 * ************************************************* */
     head = nullptr;
     tail = nullptr;
@@ -23,19 +23,19 @@ Initializes the queue type and sets up the linked list.
 
 Queue::~Queue() {
 /* **************************************************
-Destructor for Queue class.
-Cleans up all nodes in the linked list.
-@param : none
-@return : void
+*   Destructor for Queue class.
+*   Cleans up all nodes in the linked list.
+*   @param : none
+*   @return : void
 * ************************************************* */
     clear();
 }
 
 bool Queue::push(int id, string* information) {
 /* **************************************************
-This method adds a new item to the queue.
-@param : int id, string* information
-@return : bool added (true / false)
+*   This method adds a new item to the queue.
+*   @param : int id, string* information
+*   @return : bool added (true / false)
 * ************************************************* */
     bool added = false;
 
@@ -65,9 +65,9 @@ This method adds a new item to the queue.
 
 bool Queue::pull(Data* outData) {
 /* **************************************************
-This method removes an item from the queue based on the queue type (FIFO or LIFO).
-@param : Data* outData
-@return : bool pulled (true / false)
+*   This method removes an item from the queue based on the queue type (FIFO or LIFO).
+*   @param : Data* outData
+*   @return : bool pulled (true / false)
 * ************************************************* */
     bool pulled = false;
 
@@ -104,9 +104,9 @@ This method removes an item from the queue based on the queue type (FIFO or LIFO
 
 bool Queue::clear() {
 /* **************************************************
-This method clears all items from the queue.
-@param : none
-@return : bool cleared (true / false)
+*   This method clears all items from the queue.
+*   @param : none
+*   @return : bool cleared (true / false)
 * ************************************************* */
     Node* n = head;
     Node* next = nullptr;
@@ -125,9 +125,9 @@ This method clears all items from the queue.
 
 bool Queue::peek(int& id) const {
 /* **************************************************
-This method retrieves the id of the next item to be pulled from the queue without removing it.
-@param : int& id
-@return : bool found (true / false)
+*   This method retrieves the id of the next item to be pulled from the queue without removing it.
+*   @param : int& id
+*   @return : bool found (true / false)
 * ************************************************* */
     bool found = false;
     id = -1;
@@ -145,18 +145,18 @@ This method retrieves the id of the next item to be pulled from the queue withou
 
 int Queue::count() const {
 /* **************************************************
-This method returns the number of items currently in the queue.
-@param : none
-@return : int itemCount
+*   This method returns the number of items currently in the queue.
+*   @param : none
+*   @return : int itemCount
 * ************************************************* */
     return itemCount;
 }
 
 bool Queue::exists(int id) const {
 /* **************************************************
-This method checks if an item with the given id exists in the queue.
-@param : int id
-@return : bool exists (true / false)
+*   This method checks if an item with the given id exists in the queue.
+*   @param : int id
+*   @return : bool exists (true / false)
 * ************************************************* */
     Node* n = head;
 
@@ -169,9 +169,9 @@ This method checks if an item with the given id exists in the queue.
 
 int Queue::find(int id) const {
 /* **************************************************
-This method finds the index of the item with the given id in the queue.
-@param : int id
-@return : int index (0-based) or -1 if not found
+*   This method finds the index of the item with the given id in the queue.
+*   @param : int id
+*   @return : int index (0-based) or -1 if not found
 * ************************************************* */
     int index = 0;
     Node* n = (mode == LIFO ? tail : head);
