@@ -32,23 +32,20 @@ enum QueueType {
     LIFO = 1
 };
 
-/**************************************************
-*  Class: Queue
-*  Purpose: Linked-list based queue that can behave
-*           as either FIFO or LIFO depending on the
-*           constructor flag.
-************************************************* */
 class Queue {
 
 public:
     /**********************
     *  Constructors / Destructor
     ***********************/
-
+    Queue(QueueType type = FIFO);
+    ~Queue();
 
     /**********************
     *  Mutators
     ***********************/
+    bool clear();
+    bool push(int id, string* information);
     
     /**********************
     *  Accessors
@@ -70,6 +67,10 @@ private:
     /**********************
     *  Attributes
     ***********************/
+    Node* head;
+    Node* tail;
+    int   itemCount;
+    QueueType mode;
 
 };
 
