@@ -52,6 +52,9 @@ public:
     *  Accessors
     ***********************/
    bool peek(int& id) const;
+   int count() const;
+   bool exists(int id) const;
+   int find(int id) const;
 
 private:
     /**************************************************

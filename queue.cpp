@@ -124,6 +124,11 @@ This method clears all items from the queue.
 }
 
 bool Queue::peek(int& id) const {
+/* **************************************************
+This method retrieves the id of the next item to be pulled from the queue without removing it.
+@param : int& id
+@return : bool found (true / false)
+* ************************************************* */
     bool found = false;
     id = -1;
 
@@ -138,3 +143,54 @@ bool Queue::peek(int& id) const {
     return found;
 }
 
+int Queue::count() const {
+/* **************************************************
+This method returns the number of items currently in the queue.
+@param : none
+@return : int itemCount
+* ************************************************* */
+    return itemCount;
+}
+
+bool Queue::exists(int id) const {
+/* **************************************************
+This method checks if an item with the given id exists in the queue.
+@param : int id
+@return : bool exists (true / false)
+* ************************************************* */
+    Node* n = head;
+
+    while (n != nullptr && n->data.id != id) {
+        n = n->next;
+    }
+
+    return (n != nullptr);
+}
+
+int Queue::find(int id) const {
+/* **************************************************
+This method finds the index of the item with the given id in the queue.
+@param : int id
+@return : int index (0-based) or -1 if not found
+* ************************************************* */
+    int index = 0;
+    Node* n = (mode == LIFO ? tail : head);
+
+    if (mode == LIFO) {
+        while (n != nullptr && n->data.id != id) {
+            n = n->prev;
+            index = index + 1;
+        }
+    } else {
+        while (n != nullptr && n->data.id != id) {
+            n = n->next;
+            index = index + 1;
+        }
+    }
+
+    if (n == nullptr) {
+        index = -1;
+    }
+
+    return index;
+}
