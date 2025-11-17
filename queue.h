@@ -46,6 +46,7 @@ public:
     ***********************/
     bool clear();
     bool push(int id, string* information);
+    bool pull(Data* outData);
     
     /**********************
     *  Accessors

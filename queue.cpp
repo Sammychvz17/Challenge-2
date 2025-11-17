@@ -63,6 +63,56 @@ This method adds a new item to the queue.
     return added;
 }
 
+bool Queue::pull(Data* outData) {
+/* **************************************************
+This method removes an item from the queue based on the queue type (FIFO or LIFO).
+@param : Data* outData
+@return : bool pulled (true / false)
+* ************************************************* */
+    bool pulled = false;
+    Node* removeNode = nullptr;
+
+    if (outData != nullptr) {
+        if (itemCount > 0) {
+            if (mode == LIFO) {
+                removeNode = head;
+            } else {
+                removeNode = tail;
+            }
+
+            if (removeNode != nullptr) {
+                outData->id = removeNode->data.id;
+                outData->information = removeNode->data.information;
+
+                if (removeNode->prev != nullptr) {
+                    removeNode->prev->next = removeNode->next;
+                } else {
+                    head = removeNode->next;
+                }
+
+                if (removeNode->next != nullptr) {
+                    removeNode->next->prev = removeNode->prev;
+                } else {
+                    tail = removeNode->prev;
+                }
+
+                delete removeNode;
+                itemCount = itemCount - 1;
+                pulled = true;
+            }
+        }
+    }
+
+    if (!pulled) {
+        if (outData != nullptr) {
+            outData->id = -1;
+            outData->information.clear();
+        }
+    }
+
+    return pulled;
+}
+
 bool Queue::clear() {
 /* **************************************************
 This method clears all items from the queue.
