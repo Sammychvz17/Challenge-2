@@ -2,9 +2,20 @@
 *  Name: Samantha Chavez
 *  Assignment: Queue
 *  Purpose: This is the header file for the main
-*           module. It declares common includes
-*           and using statements for testing the
-*           Queue ADT.
+*           module.
 ************************************************* */
+#ifndef MAIN_H
+#define MAIN_H
+
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
 
 #include "queue.h"
+
+using std::cout;
+using std::endl;
+using std::string;
+
+#endif // MAIN_H 
